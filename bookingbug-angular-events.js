@@ -11,6 +11,72 @@
 }).call(this);
 
 (function() {
+  angular.module('BBAdminEvents').factory('AdminEventChainService', function($q, BBModel) {
+    return {
+      query: function(params) {
+        var company, defer;
+        company = params.company;
+        defer = $q.defer();
+        company.$get('event_chains').then(function(collection) {
+          return collection.$get('event_chains').then(function(event_chains) {
+            var e, models;
+            models = (function() {
+              var i, len, results;
+              results = [];
+              for (i = 0, len = event_chains.length; i < len; i++) {
+                e = event_chains[i];
+                results.push(new BBModel.Admin.EventChain(e));
+              }
+              return results;
+            })();
+            return defer.resolve(models);
+          }, function(err) {
+            return defer.reject(err);
+          });
+        }, function(err) {
+          return defer.reject(err);
+        });
+        return defer.promise;
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('BBAdminEvents').factory('AdminEventGroupService', function($q, BBModel) {
+    return {
+      query: function(params) {
+        var company, defer;
+        company = params.company;
+        defer = $q.defer();
+        company.$get('event_groups').then(function(collection) {
+          return collection.$get('event_groups').then(function(event_groups) {
+            var e, models;
+            models = (function() {
+              var i, len, results;
+              results = [];
+              for (i = 0, len = event_groups.length; i < len; i++) {
+                e = event_groups[i];
+                results.push(new BBModel.Admin.EventGroup(e));
+              }
+              return results;
+            })();
+            return defer.resolve(models);
+          }, function(err) {
+            return defer.reject(err);
+          });
+        }, function(err) {
+          return defer.reject(err);
+        });
+        return defer.promise;
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
   angular.module('BBAdminEvents').directive('eventChainTable', function(AdminCompanyService, AdminEventChainService, $modal, $log, ModalForm, $timeout) {
     var controller, link;
     controller = function($scope) {
@@ -160,72 +226,6 @@
       controller: controller,
       link: link,
       templateUrl: 'event_group_table_main.html'
-    };
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('BBAdminEvents').factory('AdminEventChainService', function($q, BBModel) {
-    return {
-      query: function(params) {
-        var company, defer;
-        company = params.company;
-        defer = $q.defer();
-        company.$get('event_chains').then(function(collection) {
-          return collection.$get('event_chains').then(function(event_chains) {
-            var e, models;
-            models = (function() {
-              var i, len, results;
-              results = [];
-              for (i = 0, len = event_chains.length; i < len; i++) {
-                e = event_chains[i];
-                results.push(new BBModel.Admin.EventChain(e));
-              }
-              return results;
-            })();
-            return defer.resolve(models);
-          }, function(err) {
-            return defer.reject(err);
-          });
-        }, function(err) {
-          return defer.reject(err);
-        });
-        return defer.promise;
-      }
-    };
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('BBAdminEvents').factory('AdminEventGroupService', function($q, BBModel) {
-    return {
-      query: function(params) {
-        var company, defer;
-        company = params.company;
-        defer = $q.defer();
-        company.$get('event_groups').then(function(collection) {
-          return collection.$get('event_groups').then(function(event_groups) {
-            var e, models;
-            models = (function() {
-              var i, len, results;
-              results = [];
-              for (i = 0, len = event_groups.length; i < len; i++) {
-                e = event_groups[i];
-                results.push(new BBModel.Admin.EventGroup(e));
-              }
-              return results;
-            })();
-            return defer.resolve(models);
-          }, function(err) {
-            return defer.reject(err);
-          });
-        }, function(err) {
-          return defer.reject(err);
-        });
-        return defer.promise;
-      }
     };
   });
 
