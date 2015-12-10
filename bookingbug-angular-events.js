@@ -11,135 +11,6 @@
 }).call(this);
 
 (function() {
-  'use strict';
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  angular.module('BB.Models').factory("Admin.EventModel", function($q, BBModel, BaseModel) {
-    var Admin_Event;
-    return Admin_Event = (function(superClass) {
-      extend(Admin_Event, superClass);
-
-      function Admin_Event(data) {
-        Admin_Event.__super__.constructor.call(this, data);
-      }
-
-      return Admin_Event;
-
-    })(BaseModel);
-  });
-
-}).call(this);
-
-(function() {
-  'use strict';
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  angular.module('BB.Models').factory("Admin.EventChainModel", function($q, BBModel, BaseModel) {
-    var Admin_EventChain;
-    return Admin_EventChain = (function(superClass) {
-      extend(Admin_EventChain, superClass);
-
-      function Admin_EventChain(data) {
-        Admin_EventChain.__super__.constructor.call(this, data);
-      }
-
-      return Admin_EventChain;
-
-    })(BaseModel);
-  });
-
-}).call(this);
-
-(function() {
-  'use strict';
-  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    hasProp = {}.hasOwnProperty;
-
-  angular.module('BB.Models').factory("Admin.EventGroupModel", function($q, BBModel, BaseModel) {
-    var Admin_EventGroup;
-    return Admin_EventGroup = (function(superClass) {
-      extend(Admin_EventGroup, superClass);
-
-      function Admin_EventGroup(data) {
-        Admin_EventGroup.__super__.constructor.call(this, data);
-      }
-
-      return Admin_EventGroup;
-
-    })(BaseModel);
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('BBAdminEvents').factory('AdminEventChainService', function($q, BBModel) {
-    return {
-      query: function(params) {
-        var company, defer;
-        company = params.company;
-        defer = $q.defer();
-        company.$get('event_chains').then(function(collection) {
-          return collection.$get('event_chains').then(function(event_chains) {
-            var e, models;
-            models = (function() {
-              var i, len, results;
-              results = [];
-              for (i = 0, len = event_chains.length; i < len; i++) {
-                e = event_chains[i];
-                results.push(new BBModel.Admin.EventChain(e));
-              }
-              return results;
-            })();
-            return defer.resolve(models);
-          }, function(err) {
-            return defer.reject(err);
-          });
-        }, function(err) {
-          return defer.reject(err);
-        });
-        return defer.promise;
-      }
-    };
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('BBAdminEvents').factory('AdminEventGroupService', function($q, BBModel) {
-    return {
-      query: function(params) {
-        var company, defer;
-        company = params.company;
-        defer = $q.defer();
-        company.$get('event_groups').then(function(collection) {
-          return collection.$get('event_groups').then(function(event_groups) {
-            var e, models;
-            models = (function() {
-              var i, len, results;
-              results = [];
-              for (i = 0, len = event_groups.length; i < len; i++) {
-                e = event_groups[i];
-                results.push(new BBModel.Admin.EventGroup(e));
-              }
-              return results;
-            })();
-            return defer.resolve(models);
-          }, function(err) {
-            return defer.reject(err);
-          });
-        }, function(err) {
-          return defer.reject(err);
-        });
-        return defer.promise;
-      }
-    };
-  });
-
-}).call(this);
-
-(function() {
   angular.module('BBAdminEvents').directive('eventChainTable', function(AdminCompanyService, AdminEventChainService, $modal, $log, ModalForm, $timeout) {
     var controller, link;
     controller = function($scope) {
@@ -290,6 +161,135 @@
       link: link,
       templateUrl: 'event_group_table_main.html'
     };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('BBAdminEvents').factory('AdminEventChainService', function($q, BBModel) {
+    return {
+      query: function(params) {
+        var company, defer;
+        company = params.company;
+        defer = $q.defer();
+        company.$get('event_chains').then(function(collection) {
+          return collection.$get('event_chains').then(function(event_chains) {
+            var e, models;
+            models = (function() {
+              var i, len, results;
+              results = [];
+              for (i = 0, len = event_chains.length; i < len; i++) {
+                e = event_chains[i];
+                results.push(new BBModel.Admin.EventChain(e));
+              }
+              return results;
+            })();
+            return defer.resolve(models);
+          }, function(err) {
+            return defer.reject(err);
+          });
+        }, function(err) {
+          return defer.reject(err);
+        });
+        return defer.promise;
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('BBAdminEvents').factory('AdminEventGroupService', function($q, BBModel) {
+    return {
+      query: function(params) {
+        var company, defer;
+        company = params.company;
+        defer = $q.defer();
+        company.$get('event_groups').then(function(collection) {
+          return collection.$get('event_groups').then(function(event_groups) {
+            var e, models;
+            models = (function() {
+              var i, len, results;
+              results = [];
+              for (i = 0, len = event_groups.length; i < len; i++) {
+                e = event_groups[i];
+                results.push(new BBModel.Admin.EventGroup(e));
+              }
+              return results;
+            })();
+            return defer.resolve(models);
+          }, function(err) {
+            return defer.reject(err);
+          });
+        }, function(err) {
+          return defer.reject(err);
+        });
+        return defer.promise;
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
+  'use strict';
+  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty;
+
+  angular.module('BB.Models').factory("Admin.EventModel", function($q, BBModel, BaseModel) {
+    var Admin_Event;
+    return Admin_Event = (function(superClass) {
+      extend(Admin_Event, superClass);
+
+      function Admin_Event(data) {
+        Admin_Event.__super__.constructor.call(this, data);
+      }
+
+      return Admin_Event;
+
+    })(BaseModel);
+  });
+
+}).call(this);
+
+(function() {
+  'use strict';
+  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty;
+
+  angular.module('BB.Models').factory("Admin.EventChainModel", function($q, BBModel, BaseModel) {
+    var Admin_EventChain;
+    return Admin_EventChain = (function(superClass) {
+      extend(Admin_EventChain, superClass);
+
+      function Admin_EventChain(data) {
+        Admin_EventChain.__super__.constructor.call(this, data);
+      }
+
+      return Admin_EventChain;
+
+    })(BaseModel);
+  });
+
+}).call(this);
+
+(function() {
+  'use strict';
+  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty;
+
+  angular.module('BB.Models').factory("Admin.EventGroupModel", function($q, BBModel, BaseModel) {
+    var Admin_EventGroup;
+    return Admin_EventGroup = (function(superClass) {
+      extend(Admin_EventGroup, superClass);
+
+      function Admin_EventGroup(data) {
+        Admin_EventGroup.__super__.constructor.call(this, data);
+      }
+
+      return Admin_EventGroup;
+
+    })(BaseModel);
   });
 
 }).call(this);
