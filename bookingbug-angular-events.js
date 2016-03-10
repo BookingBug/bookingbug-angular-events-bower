@@ -167,13 +167,13 @@
 
 (function() {
   'use strict';
-  var __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    __hasProp = {}.hasOwnProperty;
+  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty;
 
   angular.module('BB.Models').factory("Admin.EventModel", function($q, BBModel, BaseModel) {
     var Admin_Event;
-    return Admin_Event = (function(_super) {
-      __extends(Admin_Event, _super);
+    return Admin_Event = (function(superClass) {
+      extend(Admin_Event, superClass);
 
       function Admin_Event(data) {
         Admin_Event.__super__.constructor.call(this, data);
@@ -188,13 +188,13 @@
 
 (function() {
   'use strict';
-  var __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    __hasProp = {}.hasOwnProperty;
+  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty;
 
   angular.module('BB.Models').factory("Admin.EventChainModel", function($q, BBModel, BaseModel) {
     var Admin_EventChain;
-    return Admin_EventChain = (function(_super) {
-      __extends(Admin_EventChain, _super);
+    return Admin_EventChain = (function(superClass) {
+      extend(Admin_EventChain, superClass);
 
       function Admin_EventChain(data) {
         Admin_EventChain.__super__.constructor.call(this, data);
@@ -209,13 +209,13 @@
 
 (function() {
   'use strict';
-  var __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    __hasProp = {}.hasOwnProperty;
+  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty;
 
   angular.module('BB.Models').factory("Admin.EventGroupModel", function($q, BBModel, BaseModel) {
     var Admin_EventGroup;
-    return Admin_EventGroup = (function(_super) {
-      __extends(Admin_EventGroup, _super);
+    return Admin_EventGroup = (function(superClass) {
+      extend(Admin_EventGroup, superClass);
 
       function Admin_EventGroup(data) {
         Admin_EventGroup.__super__.constructor.call(this, data);
@@ -239,13 +239,13 @@
           return collection.$get('event_chains').then(function(event_chains) {
             var e, models;
             models = (function() {
-              var _i, _len, _results;
-              _results = [];
-              for (_i = 0, _len = event_chains.length; _i < _len; _i++) {
-                e = event_chains[_i];
-                _results.push(new BBModel.Admin.EventChain(e));
+              var i, len, results;
+              results = [];
+              for (i = 0, len = event_chains.length; i < len; i++) {
+                e = event_chains[i];
+                results.push(new BBModel.Admin.EventChain(e));
               }
-              return _results;
+              return results;
             })();
             return defer.resolve(models);
           }, function(err) {
@@ -272,13 +272,13 @@
           return collection.$get('event_groups').then(function(event_groups) {
             var e, models;
             models = (function() {
-              var _i, _len, _results;
-              _results = [];
-              for (_i = 0, _len = event_groups.length; _i < _len; _i++) {
-                e = event_groups[_i];
-                _results.push(new BBModel.Admin.EventGroup(e));
+              var i, len, results;
+              results = [];
+              for (i = 0, len = event_groups.length; i < len; i++) {
+                e = event_groups[i];
+                results.push(new BBModel.Admin.EventGroup(e));
               }
-              return _results;
+              return results;
             })();
             return defer.resolve(models);
           }, function(err) {
