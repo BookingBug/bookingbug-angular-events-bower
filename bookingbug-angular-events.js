@@ -2,16 +2,16 @@
   'use strict';
   angular.module('BBAdminEvents', ['BB', 'BBAdmin.Services', 'BBAdmin.Filters', 'BBAdmin.Controllers', 'trNgGrid']);
 
-  angular.module('BBAdminEvents').config(function($logProvider) {
+  angular.module('BBAdminEvents').config(["$logProvider", function($logProvider) {
     return $logProvider.debugEnabled(true);
-  });
+  }]);
 
   angular.module('BBAdminEventsMockE2E', ['BBAdminEvents', 'BBAdminMockE2E']);
 
 }).call(this);
 
 (function() {
-  angular.module('BBAdminEvents').directive('eventChainTable', function(AdminCompanyService, AdminEventChainService, $modal, $log, ModalForm, $timeout) {
+  angular.module('BBAdminEvents').directive('eventChainTable', ["AdminCompanyService", "AdminEventChainService", "$modal", "$log", "ModalForm", "$timeout", function(AdminCompanyService, AdminEventChainService, $modal, $log, ModalForm, $timeout) {
     var controller, link;
     controller = function($scope) {
       var editSuccess;
@@ -91,12 +91,12 @@
       link: link,
       templateUrl: 'event_chain_table_main.html'
     };
-  });
+  }]);
 
 }).call(this);
 
 (function() {
-  angular.module('BBAdminEvents').directive('eventGroupTable', function(AdminCompanyService, AdminEventGroupService, $modal, $log, ModalForm) {
+  angular.module('BBAdminEvents').directive('eventGroupTable', ["AdminCompanyService", "AdminEventGroupService", "$modal", "$log", "ModalForm", function(AdminCompanyService, AdminEventGroupService, $modal, $log, ModalForm) {
     var controller, link;
     controller = function($scope) {
       $scope.getEventGroups = function() {
@@ -161,7 +161,7 @@
       link: link,
       templateUrl: 'event_group_table_main.html'
     };
-  });
+  }]);
 
 }).call(this);
 
@@ -170,7 +170,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  angular.module('BB.Models').factory("Admin.EventModel", function($q, BBModel, BaseModel) {
+  angular.module('BB.Models').factory("Admin.EventModel", ["$q", "BBModel", "BaseModel", function($q, BBModel, BaseModel) {
     var Admin_Event;
     return Admin_Event = (function(superClass) {
       extend(Admin_Event, superClass);
@@ -182,7 +182,7 @@
       return Admin_Event;
 
     })(BaseModel);
-  });
+  }]);
 
 }).call(this);
 
@@ -191,7 +191,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  angular.module('BB.Models').factory("Admin.EventChainModel", function($q, BBModel, BaseModel) {
+  angular.module('BB.Models').factory("Admin.EventChainModel", ["$q", "BBModel", "BaseModel", function($q, BBModel, BaseModel) {
     var Admin_EventChain;
     return Admin_EventChain = (function(superClass) {
       extend(Admin_EventChain, superClass);
@@ -203,7 +203,7 @@
       return Admin_EventChain;
 
     })(BaseModel);
-  });
+  }]);
 
 }).call(this);
 
@@ -212,7 +212,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  angular.module('BB.Models').factory("Admin.EventGroupModel", function($q, BBModel, BaseModel) {
+  angular.module('BB.Models').factory("Admin.EventGroupModel", ["$q", "BBModel", "BaseModel", function($q, BBModel, BaseModel) {
     var Admin_EventGroup;
     return Admin_EventGroup = (function(superClass) {
       extend(Admin_EventGroup, superClass);
@@ -224,12 +224,12 @@
       return Admin_EventGroup;
 
     })(BaseModel);
-  });
+  }]);
 
 }).call(this);
 
 (function() {
-  angular.module('BBAdminEvents').factory('AdminEventChainService', function($q, BBModel) {
+  angular.module('BBAdminEvents').factory('AdminEventChainService', ["$q", "BBModel", function($q, BBModel) {
     return {
       query: function(params) {
         var company, defer;
@@ -257,12 +257,12 @@
         return defer.promise;
       }
     };
-  });
+  }]);
 
 }).call(this);
 
 (function() {
-  angular.module('BBAdminEvents').factory('AdminEventGroupService', function($q, BBModel) {
+  angular.module('BBAdminEvents').factory('AdminEventGroupService', ["$q", "BBModel", function($q, BBModel) {
     return {
       query: function(params) {
         var company, defer;
@@ -290,6 +290,6 @@
         return defer.promise;
       }
     };
-  });
+  }]);
 
 }).call(this);
