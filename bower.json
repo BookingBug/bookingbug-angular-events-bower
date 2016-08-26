@@ -1,6 +1,6 @@
 {
   "name": "bookingbug-angular-events",
-  "version": "1.4.55",
+  "version": "1.4.57",
   "homepage": "https://github.com/BookingBug/bookingbug-angular-events-bower",
   "authors": [
     "Glenn Shoosmith <glenn@bookingbug.com>",
@@ -19,7 +19,11 @@
     "tests"
   ],
   "dependencies": {
-    "bookingbug-angular-core": "1.4.55",
-    "bookingbug-angular-admin": "1.4.55"
+    "bookingbug-angular-core": "1.4.57",
+    "bookingbug-angular-admin": "1.4.57"
+  },
+  "resolutions": {
+    "bookingbug-angular-core": "master",
+    "angular": "1.2.28"
   }
 }

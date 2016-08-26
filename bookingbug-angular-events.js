@@ -11,8 +11,7 @@
 }).call(this);
 
 (function() {
-  'use strict';
-  angular.module('BBAdminEvents').directive('eventChainTable', ["BBModel", "$log", "ModalForm", function(BBModel, $log, ModalForm) {
+  angular.module('BBAdminEvents').directive('eventChainTable', ["AdminCompanyService", "AdminEventChainService", "$modal", "$log", "ModalForm", "$timeout", function(AdminCompanyService, AdminEventChainService, $modal, $log, ModalForm, $timeout) {
     var controller, link;
     controller = function($scope) {
       var editSuccess;
@@ -22,7 +21,7 @@
         params = {
           company: $scope.company
         };
-        return BBModel.Admin.EventChain.$query(params).then(function(event_chains) {
+        return AdminEventChainService.query(params).then(function(event_chains) {
           return $scope.event_chains = event_chains;
         });
       };
@@ -81,7 +80,7 @@
       if (scope.company) {
         return scope.getEventChains();
       } else {
-        return BBModel.Admin.Company.$query(attrs).then(function(company) {
+        return AdminCompanyService.query(attrs).then(function(company) {
           scope.company = company;
           return scope.getEventChains();
         });
@@ -97,8 +96,7 @@
 }).call(this);
 
 (function() {
-  'use strict';
-  angular.module('BBAdminEvents').directive('eventGroupTable', ["BBModel", "$log", "ModalForm", function(BBModel, $log, ModalForm) {
+  angular.module('BBAdminEvents').directive('eventGroupTable', ["AdminCompanyService", "AdminEventGroupService", "$modal", "$log", "ModalForm", function(AdminCompanyService, AdminEventGroupService, $modal, $log, ModalForm) {
     var controller, link;
     controller = function($scope) {
       $scope.getEventGroups = function() {
@@ -106,7 +104,7 @@
         params = {
           company: $scope.company
         };
-        return BBModel.Admin.EventGroup.$query(params).then(function(event_groups) {
+        return AdminEventGroupService.query(params).then(function(event_groups) {
           $scope.event_groups_models = event_groups;
           return $scope.event_groups = _.map(event_groups, function(event_group) {
             return _.pick(event_group, 'id', 'name', 'mobile');
@@ -152,7 +150,7 @@
       if (scope.company) {
         return scope.getEventGroups();
       } else {
-        return BBModel.Admin.Company.$query(attrs).then(function(company) {
+        return AdminCompanyService.query(attrs).then(function(company) {
           scope.company = company;
           return scope.getEventGroups();
         });
@@ -172,7 +170,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  angular.module('BB.Models').factory("AdminEventModel", ["$q", "BBModel", "BaseModel", function($q, BBModel, BaseModel) {
+  angular.module('BB.Models').factory("Admin.EventModel", ["$q", "BBModel", "BaseModel", function($q, BBModel, BaseModel) {
     var Admin_Event;
     return Admin_Event = (function(superClass) {
       extend(Admin_Event, superClass);
@@ -193,7 +191,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  angular.module('BB.Models').factory("AdminEventChainModel", ["$q", "BBModel", "BaseModel", "EventChainService", function($q, BBModel, BaseModel, EventChainService) {
+  angular.module('BB.Models').factory("Admin.EventChainModel", ["$q", "BBModel", "BaseModel", function($q, BBModel, BaseModel) {
     var Admin_EventChain;
     return Admin_EventChain = (function(superClass) {
       extend(Admin_EventChain, superClass);
@@ -201,10 +199,6 @@
       function Admin_EventChain(data) {
         Admin_EventChain.__super__.constructor.call(this, data);
       }
-
-      Admin_EventChain.$query = function(params) {
-        return EventChainService.query(params);
-      };
 
       return Admin_EventChain;
 
@@ -218,7 +212,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  angular.module('BB.Models').factory("AdminEventGroupModel", ["$q", "BBModel", "BaseModel", "EventGroupService", function($q, BBModel, BaseModel, EventGroupService) {
+  angular.module('BB.Models').factory("Admin.EventGroupModel", ["$q", "BBModel", "BaseModel", function($q, BBModel, BaseModel) {
     var Admin_EventGroup;
     return Admin_EventGroup = (function(superClass) {
       extend(Admin_EventGroup, superClass);
@@ -226,10 +220,6 @@
       function Admin_EventGroup(data) {
         Admin_EventGroup.__super__.constructor.call(this, data);
       }
-
-      Admin_EventGroup.$query = function(params) {
-        return EventGroupService.query(params);
-      };
 
       return Admin_EventGroup;
 
@@ -239,7 +229,6 @@
 }).call(this);
 
 (function() {
-  'use strict';
   angular.module('BBAdminEvents').factory('AdminEventChainService', ["$q", "BBModel", function($q, BBModel) {
     return {
       query: function(params) {
@@ -273,7 +262,6 @@
 }).call(this);
 
 (function() {
-  'use strict';
   angular.module('BBAdminEvents').factory('AdminEventGroupService', ["$q", "BBModel", function($q, BBModel) {
     return {
       query: function(params) {
