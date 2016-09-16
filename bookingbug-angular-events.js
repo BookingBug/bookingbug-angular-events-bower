@@ -90,7 +90,7 @@
     return {
       controller: controller,
       link: link,
-      templateUrl: 'event_chain_table_main.html'
+      templateUrl: 'event-chain-table/event_chain_table_main.html'
     };
   });
 
@@ -161,7 +161,7 @@
     return {
       controller: controller,
       link: link,
-      templateUrl: 'event_group_table_main.html'
+      templateUrl: 'event-chain-table/event_group_table_main.html'
     };
   });
 
