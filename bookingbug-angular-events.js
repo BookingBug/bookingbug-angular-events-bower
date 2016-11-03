@@ -2,11 +2,16 @@
   'use strict';
   angular.module('BBAdminEvents', ['BB', 'BBAdmin.Services', 'BBAdmin.Filters', 'BBAdmin.Controllers', 'trNgGrid']);
 
-  angular.module('BBAdminEvents').config(function($logProvider) {
-    return $logProvider.debugEnabled(true);
-  });
-
   angular.module('BBAdminEventsMockE2E', ['BBAdminEvents', 'BBAdminMockE2E']);
+
+}).call(this);
+
+(function() {
+  'use strict';
+  angular.module('BBAdminEvents').config(function($logProvider) {
+    'ngInject';
+    $logProvider.debugEnabled(true);
+  });
 
 }).call(this);
 
@@ -302,6 +307,30 @@
         return defer.promise;
       }
     };
+  });
+
+}).call(this);
+
+(function() {
+  'use strict';
+  angular.module('BBAdminEvents').config(function($translateProvider) {
+    'ngInject';
+    var translations;
+    translations = {
+      EVENTS: {
+        EVENT_CHAIN_TABLE: {
+          NEW_EVENT_CHAIN_BTN: 'New Event Chain',
+          DELETE_BTN: '@:COMMON.BTN.DELETE',
+          EDIT_BTN: '@:COMMON.BTN.EDIT'
+        },
+        EVENT_GROUP_TABLE: {
+          NEW_EVENT_GROUP: 'New Event Group',
+          DELETE_BTN: '@:COMMON.BTN.DELETE',
+          EDIT_BTN: '@:COMMON.BTN.EDIT'
+        }
+      }
+    };
+    $translateProvider.translations('en', translations);
   });
 
 }).call(this);
