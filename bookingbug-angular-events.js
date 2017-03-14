@@ -179,15 +179,13 @@ angular.module('BB.Models').factory("AdminEventModel", function ($q, BBModel, Ba
         function Admin_Event(data) {
             _classCallCheck(this, Admin_Event);
 
-            return _possibleConstructorReturn(this, (Admin_Event.__proto__ || Object.getPrototypeOf(Admin_Event)).call(this, data));
+            return _possibleConstructorReturn(this, _BaseModel.call(this, data));
         }
 
         return Admin_Event;
     }(BaseModel);
 });
 "use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -202,22 +200,17 @@ angular.module('BB.Models').factory("AdminEventChainModel", function ($q, BBMode
         function Admin_EventChain(data) {
             _classCallCheck(this, Admin_EventChain);
 
-            return _possibleConstructorReturn(this, (Admin_EventChain.__proto__ || Object.getPrototypeOf(Admin_EventChain)).call(this, data));
+            return _possibleConstructorReturn(this, _BaseModel.call(this, data));
         }
 
-        _createClass(Admin_EventChain, null, [{
-            key: "$query",
-            value: function $query(params) {
-                return EventChainService.query(params);
-            }
-        }]);
+        Admin_EventChain.$query = function $query(params) {
+            return EventChainService.query(params);
+        };
 
         return Admin_EventChain;
     }(BaseModel);
 });
 "use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -232,15 +225,12 @@ angular.module('BB.Models').factory("AdminEventGroupModel", function ($q, BBMode
         function Admin_EventGroup(data) {
             _classCallCheck(this, Admin_EventGroup);
 
-            return _possibleConstructorReturn(this, (Admin_EventGroup.__proto__ || Object.getPrototypeOf(Admin_EventGroup)).call(this, data));
+            return _possibleConstructorReturn(this, _BaseModel.call(this, data));
         }
 
-        _createClass(Admin_EventGroup, null, [{
-            key: "$query",
-            value: function $query(params) {
-                return EventGroupService.query(params);
-            }
-        }]);
+        Admin_EventGroup.$query = function $query(params) {
+            return EventGroupService.query(params);
+        };
 
         return Admin_EventGroup;
     }(BaseModel);
