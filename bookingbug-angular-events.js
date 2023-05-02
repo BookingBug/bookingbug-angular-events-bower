@@ -235,6 +235,28 @@ angular.module('BB.Models').factory("AdminEventGroupModel", function ($q, BBMode
         return Admin_EventGroup;
     }(BaseModel);
 });
+"use strict";
+
+angular.module("BBAdminEvents").config(function ($translateProvider) {
+    "ngInject";
+
+    var translations = {
+        EVENTS: {
+            EVENT_CHAIN_TABLE: {
+                NEW_EVENT_CHAIN_BTN: "New Event Chain",
+                DELETE_BTN: "@:COMMON.BTN.DELETE",
+                EDIT_BTN: "@:COMMON.BTN.EDIT"
+            },
+            EVENT_GROUP_TABLE: {
+                NEW_EVENT_GROUP: "New Event Group",
+                DELETE_BTN: "@:COMMON.BTN.DELETE",
+                EDIT_BTN: "@:COMMON.BTN.EDIT"
+            }
+        }
+    };
+
+    $translateProvider.translations("en", translations);
+});
 'use strict';
 
 angular.module('BBAdminEvents').factory('AdminEventChainService', function ($q, BBModel) {
@@ -284,26 +306,4 @@ angular.module('BBAdminEvents').factory('AdminEventGroupService', function ($q, 
             return defer.promise;
         }
     };
-});
-"use strict";
-
-angular.module("BBAdminEvents").config(function ($translateProvider) {
-    "ngInject";
-
-    var translations = {
-        EVENTS: {
-            EVENT_CHAIN_TABLE: {
-                NEW_EVENT_CHAIN_BTN: "New Event Chain",
-                DELETE_BTN: "@:COMMON.BTN.DELETE",
-                EDIT_BTN: "@:COMMON.BTN.EDIT"
-            },
-            EVENT_GROUP_TABLE: {
-                NEW_EVENT_GROUP: "New Event Group",
-                DELETE_BTN: "@:COMMON.BTN.DELETE",
-                EDIT_BTN: "@:COMMON.BTN.EDIT"
-            }
-        }
-    };
-
-    $translateProvider.translations("en", translations);
 });
